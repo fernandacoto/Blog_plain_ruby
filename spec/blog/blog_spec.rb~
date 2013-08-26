@@ -1,0 +1,9 @@
+require 'spec_helper'
+module Blog
+  describe Post do
+    describe "#post" do
+      it "waits for title and a comment"
+    end
+  end
+end
+
