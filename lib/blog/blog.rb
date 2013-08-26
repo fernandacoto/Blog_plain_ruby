@@ -11,7 +11,18 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   def do_GET(req, res)
     @title = req.query["title"]
     @comment = req.query["comment"]
+    prueba= ":D"
     return_body_principal(res)
+    if req.path_info == "/url"
+      res.body =<<-_end_of_html_
+      <html>
+      <body>
+      <h1>INDEX</h1>
+      #{prueba}
+      </body>
+      </html>
+      _end_of_html_
+    end
     res["content-type"] = "text/html"
   end
   
@@ -23,7 +34,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   def return_body_principal(res)
     return res.body =<<-_end_of_html_
     <html>
-         <h1>Blog in plain ruby using webrick</h1>
+         <h1 align = "center ">Blog in plain ruby using webrick</h1>
 	       <br><br>
 	       <form method="POST" enctype="multipart/form-data">
                 Title:    <input type="text" name="title"><br>
@@ -32,7 +43,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
 	       </form>
          <form method="POST" enctyoe="multipart/form-data">
 	       <button type="button" name= "show_all_posts">Show all posts</button>
-	       <button type="button" name= "index">Index</button>
+	       <a href="url" name= "index">Index</a>
          </form>
     </html>
     _end_of_html_
@@ -41,7 +52,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   def save_post
     File.open("posts.txt", 'a+') do
     |f| f.write("*-*-*-*-*-*-*")
-      	f.write("\n" +"Title:" + @title + "\n" )
+      	f.write("\n" + "Title:" + @title + "\n" )
       	f.write("Comment:" + @comment + "\n")
         f.write((Time.now).inspect + "\n")
       	f.write("*-*-*-*-*-*-*" + "\n")

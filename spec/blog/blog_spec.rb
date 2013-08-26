@@ -2,7 +2,11 @@ require 'spec_helper'
 module Blog
   describe Blog do
     describe "#post" do
-      it "waits for title and a comment"
+      it "waits for title and a comment" do
+        @tilte = "testing"
+        @comment = "testing"
+        save_post
+      end
     end
     describe "#see#" do
       it "should show all posts"
