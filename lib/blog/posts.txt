@@ -1,10 +1,13 @@
-*-*-*-*-*-*-*
-Title:Test1
-Comment:Comment1
-2013-08-26 11:13:03 -0600
-*-*-*-*-*-*-*
-*-*-*-*-*-*-*
-Title:Test1
-Comment:Comment1
-2013-08-26 11:29:30 -0600
-*-*-*-*-*-*-*
+Comment:Prueba comentario 3
+2013-09-04 09:11:45 -0600
+Fin de Post
+Inicio de Post
+Title:Prueba 4
+Comment:Prueba comentario 4
+2013-09-04 09:11:45 -0600
+Fin de Post
+Inicio de Post
+Title:prueba
+Comment:prueba prueba
+2013-09-04 09:50:54 -0600
+Fin de Post
