@@ -1,0 +1,5 @@
+require 'blog.rb'
+svr = WEBrick::HTTPServer.new(:Port=>10080)
+svr.mount("/", PostSampleServlet, 100000)
+trap(:INT){ svr.shutdown }
+svr.start

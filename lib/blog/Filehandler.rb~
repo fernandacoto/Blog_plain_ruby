@@ -2,7 +2,7 @@ require 'fileutils'
 class Filehandler
 
   def save_post(title,comment)
-    File.open("../blog/posts.txt", 'a+') do
+    File.open("posts.txt", 'a+') do
     |f| f.write("Inicio de Post")
       	f.write("\n" + "Title:" + title + "\n" )
       	f.write("Comment:" + comment + "\n")

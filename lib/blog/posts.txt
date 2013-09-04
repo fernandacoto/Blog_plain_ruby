@@ -1,13 +1,10 @@
-Comment:Prueba comentario 3
-2013-09-04 09:11:45 -0600
+Inicio de Post
+Title:Title 1
+Comment:comment 1
+2013-09-04 11:32:57 -0600
 Fin de Post
 Inicio de Post
-Title:Prueba 4
-Comment:Prueba comentario 4
-2013-09-04 09:11:45 -0600
-Fin de Post
-Inicio de Post
-Title:prueba
-Comment:prueba prueba
-2013-09-04 09:50:54 -0600
+Title:Title 222222
+Comment:comment 1
+2013-09-04 11:32:57 -0600
 Fin de Post

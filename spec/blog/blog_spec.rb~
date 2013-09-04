@@ -10,7 +10,7 @@ module Blog
         #trap(:INT){ svr.shutdown }
         svr.start
         get :get_event, {:title => "TITULO 1", :comment => "Comment" }
-        response.code.should == 200
+        response.code.should == "204"
         svr.shutdown
         #srv.shoutdown
         # save_post
