@@ -1,6 +1,6 @@
 module Blog
 require "webrick"
-require 'blog/Filehandler.rb'
+require './Filehandler.rb'
 
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
@@ -91,8 +91,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
 
 end
 
-#svr = WEBrick::HTTPServer.new(:Port=>10080)
-#svr.mount("/", PostSampleServlet, 100000)
-#trap(:INT){ svr.shutdown }
-#svr.start
+svr = WEBrick::HTTPServer.new(:Port=>10080)
+svr.mount("/", PostSampleServlet, 100000)
+trap(:INT){ svr.shutdown }
+svr.start
 end

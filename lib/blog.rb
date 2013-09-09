@@ -1,2 +1,2 @@
-require 'blog/newblog.rb'
-require 'blog/Filehandler.rb'
+#require 'blog/newblog.rb'
+#require 'blog/Filehandler.rb'

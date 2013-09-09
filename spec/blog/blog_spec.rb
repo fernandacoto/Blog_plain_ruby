@@ -1,18 +1,17 @@
 require 'spec_helper'
+require 'webrick'
 module Blog
   describe Blog do
     describe "#post" do
       it "waits for title and a comment" do
-        @tilte = "testing"
-        @comment = "testing"
         svr = WEBrick::HTTPServer.new(:Port=>10080)
-        svr.mount("/", PostSampleServlet, 100000)
+        svr.mount("/",PostSampleServlet, 100000)
         #trap(:INT){ svr.shutdown }
         svr.start
-        get :get_event, {:title => "TITULO 1", :comment => "Comment" }
-        response.code.should == 200
+        post "http://localhost:10080/"
+        status.should.equal 200
+        #res.code.should == 200
         svr.shutdown
-        #srv.shoutdown
         # save_post
       end
     end
