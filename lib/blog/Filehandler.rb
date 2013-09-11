@@ -27,10 +27,10 @@ class Filehandler
 
   def return_post(index)
     line= (index - 1)*5
-    post = ""
-    post<< IO.readlines("posts.txt")[line + 1].to_s
-    post<< IO.readlines("posts.txt")[line + 2].to_s
-    post<< IO.readlines("posts.txt")[line + 3].to_s
+    post = []
+    post[0] = IO.readlines("posts.txt")[line + 1].to_s
+    post[1] = IO.readlines("posts.txt")[line + 2].to_s
+    post[2] = IO.readlines("posts.txt")[line + 3].to_s
     return post
   end
 
@@ -66,6 +66,6 @@ class Filehandler
   #end
 end
 
-prueba = Filehandler.new()
+#prueba = Filehandler.new()
 #prueba.return_post(2)
 #prueba.delete_post(3)

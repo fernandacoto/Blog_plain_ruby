@@ -1,10 +1,10 @@
 Inicio de Post
-Title:Title 1
+Title:Title 222222
 Comment:comment 1
 2013-09-04 11:32:57 -0600
 Fin de Post
 Inicio de Post
-Title:Title 222222
-Comment:comment 1
-2013-09-04 11:32:57 -0600
+Title:Un show mas
+Comment:Regular Show is an American animated television series created by J. G. Quintel for Cartoon Network that premiered on September 6, 2010. The series revolves around the lives of two friends, a Blue Jay named Mordecai (Quintel) and a raccoon named Rigby (William Salyers)—both employed as groundskeepers at a local park. Their regular attempts to slack off usually lead to surreal, extreme and often supernatural misadventures. During these misadventures, they interact with the show's other main characters: Benson (Sam Marin), Pops (Marin), Muscle Man (Marin), Hi-Five Ghost (Quintel), Skips (Mark Hamill) and Margaret (Janie Haddad-Tompkins)
+2013-09-11 09:29:35 -0600
 Fin de Post

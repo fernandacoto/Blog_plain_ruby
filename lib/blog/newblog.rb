@@ -1,6 +1,6 @@
 module Blog
 require "webrick"
-require 'blog/Filehandler.rb'
+require './Filehandler.rb'
 
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
@@ -16,9 +16,84 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     return_body_principal(res)
     if req.path_info == "/url"
       return_titles(res)
+    elsif is_show_post?(req.path_info)
+      is_show(req.path_info,res)
+    elsif is_delete_post?(req.path_info)
+     delete_post(req.path_info,res)
+    #else is_edit_post(req.path_info)
+    # edit_post(req.path_info,res) 
     end
-    is_title?(req.path_info, res)
+    #is_title?(req.path_info, res)
     res["content-type"] = "text/html"
+  end
+
+  def is_show_post?(path)
+    clave ="Ver"
+    if path.include? clave
+      return true
+    end
+  end
+
+  def is_show(path,response)
+    position = path =~ /\d/
+    if position != nil
+      get_post_number(path,response,position)
+      get_post_content(response,@post_number.to_i)
+    end
+  end
+
+  def get_post_number(path,response,position)
+    if path.length == (position - 1)
+      @post_number = path[position]
+    else
+      @post_number = is_more_than_a_digit(path,position)
+    end
+  end
+
+  def is_more_than_a_digit(path,index)
+    post = ""
+    while path.length > index
+      post << path[index]
+      index += 1
+    end
+    return post.to_i
+  end
+
+  def get_post_content(response,post_number)
+    content = Filehandler.new()
+    post = []
+    post = content.return_post(post_number)
+    return response.body =<<-_end_of_html_
+      <html>
+      <body>
+      <h1>Showing post number #{post_number}</h1>
+      <h2>#{post[0]}</h2>
+      <p>#{post[1] + "\n"}</p>
+      <p>#{post[2]}</p>
+      <br>
+      <br>
+      <form method="POST" enctyoe="multipart/form-data">
+	      <a href="url" name= "index">Index</a>
+      </form>
+      </body>
+      </html>
+      _end_of_html_
+  end
+
+  def is_delete_post?(path)
+    clave ="eliminar"
+    if path.include? clave
+      return true
+    end
+  end
+
+  def delete_post(path,response)
+    position = path =~ /\d/
+    if position != nil
+      get_post_number(path,response,position)
+      action = Filehandler.new()
+      action.delete_post(@post_number)
+    end
   end
 
   def is_title?(extension, res)
@@ -82,7 +157,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       |element|
       post = ""
       post<<index.to_s
-      list<<"<li><a href=#{post} name=#{element}>#{element}</a><ul><li><a href=#{"eliminar"+ post}>Eliminar</a></li><li><a href=#{"editar"+ post}>Editar</a></li></ul></li>"
+      list<<"<li><a href=#{"Ver" + post} name=#{element}>#{element}</a><ul><li><a href=#{"eliminar"+ post}>Eliminar</a></li><li><a href=#{"editar"+ post}>Editar</a></li></ul></li>"
       index +=1
     end
     list<<"</ul>"
