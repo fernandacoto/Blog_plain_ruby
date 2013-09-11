@@ -1,1 +1,2 @@
-require 'blog.rb'
+require Dir.pwd+'/lib/blog.rb'
+
