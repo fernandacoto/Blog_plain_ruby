@@ -1,10 +1,20 @@
 Inicio de Post
-Title:Title 222222
-Comment:comment 1
-2013-09-04 11:32:57 -0600
-Fin de Post
-Inicio de Post
 Title:Un show mas
 Comment:Regular Show is an American animated television series created by J. G. Quintel for Cartoon Network that premiered on September 6, 2010. The series revolves around the lives of two friends, a Blue Jay named Mordecai (Quintel) and a raccoon named Rigby (William Salyers)—both employed as groundskeepers at a local park. Their regular attempts to slack off usually lead to surreal, extreme and often supernatural misadventures. During these misadventures, they interact with the show's other main characters: Benson (Sam Marin), Pops (Marin), Muscle Man (Marin), Hi-Five Ghost (Quintel), Skips (Mark Hamill) and Margaret (Janie Haddad-Tompkins)
 2013-09-11 09:29:35 -0600
+Fin de Post
+Inicio de Post
+Title:Fall out boy
+Comment:Fall Out Boy is an American rock band from Wilmette, Illinois, formed in 2001. The band consists of vocalist/guitarist Patrick Stump, bassist Pete Wentz, guitarist Joe Trohman, and drummer Andy Hurley. The members originally played in local underground hardcore bands before forming Fall Out Boy. With Pete Wentz as the band's primary lyricist and Patrick Stump as the primary composer, Fall Out Boy broke out of the underground music scene and reached mainstream success with their major label album From Under the Cork Tree. Released in 2005 as the follow-up to their 2003 debut Take This to Your Grave, the album won several awards and achieved double platinum status after selling more than 2.7 million albums in the United States, spawning top ten singles "Sugar, We're Goin Down" and "Dance, Dance".
+2013-09-11 10:15:04 -0600
+Fin de Post
+Inicio de Post
+Title:Macklemore
+Comment:Ben Haggerty, known by his stage name Macklemore (/&#712;mæk.l&#601;&#716;m&#596;r/ mak-l&#601;-mor)[1] and formerly Professor Macklemore, is an American rapper. He began independently releasing music in 2000 and now collaborates with producer Ryan Lewis, violinist Andrew Joslyn, lead guitarist Ray Dalton, and trumpeter Owuor Arunga. He has gained a significant online fan base. He has released one mixtape, three EPs and two albums, although none on a major record label.
+2013-09-11 10:15:42 -0600
+Fin de Post
+Inicio de Post
+Title:Bruno Mars
+Comment:Peter Gene Hernandez (born October 8, 1985), known by his stage name Bruno Mars, is an American singer-songwriter and record producer. Raised in Honolulu, Hawaii, by a family of musicians, Mars began making music at a young age and performed in various musical venues in his hometown throughout his childhood. He graduated from high school and moved to Los Angeles, to pursue a musical career. Mars produced songs for other artists, joining production team The Smeezingtons.
+2013-09-11 10:16:50 -0600
 Fin de Post

@@ -23,7 +23,6 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     #else is_edit_post(req.path_info)
     # edit_post(req.path_info,res) 
     end
-    #is_title?(req.path_info, res)
     res["content-type"] = "text/html"
   end
 
