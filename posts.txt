@@ -1,0 +1,5 @@
+Inicio de Post
+Title:titulo
+Comment:comentario
+2013-09-11 11:27:38 -0600
+Fin de Post

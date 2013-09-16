@@ -1,4 +1,5 @@
 require 'fileutils'
+module Blog
 class Filehandler
 
   def save_post(title,comment)
@@ -65,7 +66,7 @@ class Filehandler
   #  print "END"
   #end
 end
-
+end
 #prueba = Filehandler.new()
 #prueba.return_post(2)
 #prueba.delete_post(3)
