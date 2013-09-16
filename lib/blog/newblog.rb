@@ -20,8 +20,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       is_show(req.path_info,res)
     elsif is_delete_post?(req.path_info)
      delete_post(req.path_info,res)
-    #else is_edit_post(req.path_info)
-    # edit_post(req.path_info,res) 
+    else is_edit_post(req.path_info)
+     edit_post(req.path_info,res) 
     end
     res["content-type"] = "text/html"
   end
@@ -39,6 +39,42 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       get_post_number(path,response,position)
       get_post_content(response,@post_number.to_i)
     end
+  end
+
+  def is_edit_post(path)
+    clave ="editar"
+    if path.include? clave
+      return true
+    end
+  end
+
+  def edit_post(path,response)
+    position = path =~ /\d/
+    if position != nil
+      get_post_number(path,response,position)
+      get_post_content_editable(response,@post_number.to_i)
+      delete_post(path,response)
+    end
+  end
+  
+  def get_post_content_editable(response,post_number)
+    content = Filehandler.new()
+    post = []
+    post = content.return_post(post_number)
+    return response.body =<<-_end_of_html_
+    <html>
+         <h1 align = "center ">Edit post</h1>
+	       <br><br>
+	       <form method="POST" enctype="multipart/form-data">
+                Title:    <input type="text" name="title" value ="#{post[0]}"><br>
+                Comment:  <textarea type= "text" name ="comment">#{post[1]}</textarea><br>
+               <input type="submit" /></form>
+	       </form>
+         <form method="POST" enctyoe="multipart/form-data">
+	       <a href="url" name= "index">Index</a>
+         </form>
+    </html>
+      _end_of_html_
   end
 
   def get_post_number(path,response,position)
