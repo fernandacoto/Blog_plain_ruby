@@ -12,7 +12,6 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   def do_GET(req, res)
     @title = req.query["title"]
     @comment = req.query["comment"]
-    @prueba= ":D"
     return_body_principal(res)
     if req.path_info == "/url"
       return_titles(res)
@@ -131,14 +130,6 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     end
   end
 
-  def is_title?(extension, res)
-    array = extension.split("/")
-    post = Filehandler.new()
-    print "POST A BUSCAR"
-    print array[1]
-    print post.return_post(array[1].to_i)
-  end
-
   def do_POST(req, res)
     do_GET(req, res)
     escribir = Filehandler.new()
@@ -161,17 +152,6 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     </html>
     _end_of_html_
   end 
-
-  def return_prueba(res)
-    return res.body =<<-_end_of_html_
-      <html>
-      <body>
-      <h1>INDEX</h1>
-      #{@prueba}
-      </body>
-      </html>
-      _end_of_html_
-  end
 
   def return_titles(res)
     titles = Filehandler.new()

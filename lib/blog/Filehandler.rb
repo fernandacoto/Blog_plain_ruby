@@ -51,22 +51,5 @@ class Filehandler
     FileUtils.mv 'posts.txt.tmp','posts.txt'
   end
 
-  #def print_array(titles)
-  #  index = 1
-  #  print "Print array"
-  #  titles.each do&& (line_counter != (line_in_file - 1)) && (line_counter != (line_in_file + 1)) && (line_counter != (line_in_file + 2)) && (line_counter != (line_in_file + 3)) && (line_counter != (line_in_file + 4)))
-  #  sts_title
-  #
-  #    |element|
-  #    print element + "element\n"
-  #    print index 
-  #    print "index\n"
-  #    index +=1
-  #  end
-  #  print "END"
-  #end
 end
 end
-#prueba = Filehandler.new()
-#prueba.return_post(2)
-#prueba.delete_post(3)
