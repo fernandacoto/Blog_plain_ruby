@@ -1,10 +1,6 @@
-Inicio de Post
-Title:Green Day
-Comment:This is about Green Day
-2013-09-16 11:01:56 -0600
 Fin de Post
 Inicio de Post
-Title:Fall out boy- Edited
-Comment:This is about fall out boy -EDITED
-2013-09-16 11:02:22 -0600
+Title:Title 2
+Comment:Comment 2 testin' writing posts
+2013-09-18 08:30:50 -0600
 Fin de Post
