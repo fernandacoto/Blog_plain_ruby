@@ -72,10 +72,10 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
                 Comment:  <textarea type= "text" name ="comment">#{post[1]}</textarea><br>
                <input type="submit" /></form>
 	       </form>
-         <form method="POST" enctyoe="multipart/form-data">
+         <form method="POST" enctype="multipart/form-data">
 	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a><br>
          <a href="newpost" name="writepost" style="color:#E89C0C;">Write a new post</a><br>
-         <a href= "/" name="mainpage" style="color:#E89C0C;">Go to main page</a>
+         <a href="/" name="mainpage" style="color:#E89C0C;">Go to main page</a>
          </form>
     </body>
     </html>
@@ -157,6 +157,9 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     </body>
     </html>
     _end_of_html_
+    if (req.path_info).include? "editar"
+       delete_post(req.path_info,res)
+    end
   end
 
   def return_body_principal(res)
@@ -170,7 +173,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
                 Comment:  <textarea type= "text" name ="comment"></textarea><br>
                <input type="submit" /></form>
 	       </form>
-         <form method="POST" enctyoe="multipart/form-data">
+         <form method="POST" enctype="multipart/form-data">
 	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a><br>
          <a href = "/" name = "main_page" style="color:#E89C0C;">Go to Main Page</a>
          </form>
