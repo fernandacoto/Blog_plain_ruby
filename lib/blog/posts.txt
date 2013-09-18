@@ -1,6 +1,15 @@
+Inicio de Post
+Title:Simple Plan
+Simple plan
+2013-09-18 10:04:12 -0600
 Fin de Post
 Inicio de Post
-Title:Title 2
-Comment:Comment 2 testin' writing posts
-2013-09-18 08:30:50 -0600
+Title:Title:Simple Plan
+Simple plan
+2013-09-18 10:04:20 -0600
+Fin de Post
+Inicio de Post
+Title:Title:Simple Plan edited
+Simple plan
+2013-09-18 10:04:26 -0600
 Fin de Post

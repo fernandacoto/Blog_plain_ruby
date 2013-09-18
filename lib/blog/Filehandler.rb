@@ -5,8 +5,8 @@ class Filehandler
   def save_post(title,comment)
     File.open("posts.txt", 'a+') do
     |f| f.write("Inicio de Post")
-      	f.write("\n" + "Title:" + title + "\n" )
-      	f.write("Comment:" + comment + "\n")
+      	f.write("\n"+"Title:" + title + "\n" )
+      	f.write( comment + "\n")
         f.write((Time.now).inspect + "\n")
       	f.write("Fin de Post" + "\n")
     end 
@@ -33,6 +33,15 @@ class Filehandler
     post[1] = IO.readlines("posts.txt")[line + 2].to_s
     post[2] = IO.readlines("posts.txt")[line + 3].to_s
     return post
+  end
+
+  def edit_post(index)
+    final_post=[]
+    post=return_post(index)
+    final_post[0] = post[0].chomp
+    final_post[1] = post[1].chomp
+    final_post[2] = post[2].chomp
+    return final_post
   end
 
   def delete_post(post_number)

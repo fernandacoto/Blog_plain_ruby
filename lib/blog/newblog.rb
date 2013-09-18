@@ -54,14 +54,14 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     if position != nil
       get_post_number(path,response,position)
       get_post_content_editable(response,@post_number.to_i)
-      delete_post(path,response)
+      #delete_post(path,response)
     end
   end
   
   def get_post_content_editable(response,post_number)
     content = Filehandler.new()
     post = []
-    post = content.return_post(post_number)
+    post = content.edit_post(post_number)
     return response.body =<<-_end_of_html_
     <html>
     <body style= "background-color:#D1E0E0;">
@@ -107,9 +107,9 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       <html>
       <body style= "background-color:#D1E0E0;">
       <h1>Showing post number #{post_number}</h1>
-      <h2>#{post[0]}</h2>
-      <p>#{post[1] + "\n"}</p>
-      <p>#{post[2]}</p>
+      <h2>Title:  #{post[0]}</h2>
+      <p>Comment: #{post[1] + "\n"}</p>
+      <p>Date/time: #{post[2]}</p>
       <br>
       <br>
       <form method="POST" enctype="multipart/form-data">
