@@ -19,10 +19,10 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       return_titles(res)
     elsif is_show_post?(req.path_info)
       is_show(req.path_info,res)
-    elsif is_delete_post?(req.path_info)
-     delete_post(req.path_info,res)
     elsif is_edit_post(req.path_info)
      edit_post(req.path_info,res)
+    elsif is_delete_post?(req.path_info)
+     delete_post(req.path_info,res)
     end
     res["content-type"] = "text/html"
   end
@@ -61,7 +61,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     content = Filehandler.new()
     post = []
     post = content.edit_post(post_number)
-    content.delete_post(post_number)
+    #content.delete_post(post_number)
     return response.body =<<-_end_of_html_
     <html>
     <body style= "background-color:#D1E0E0;">
