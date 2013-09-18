@@ -21,8 +21,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       is_show(req.path_info,res)
     elsif is_delete_post?(req.path_info)
      delete_post(req.path_info,res)
-    else is_edit_post(req.path_info)
-     edit_post(req.path_info,res) 
+    elsif is_edit_post(req.path_info)
+     edit_post(req.path_info,res)
     end
     res["content-type"] = "text/html"
   end
@@ -53,15 +53,15 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     position = path =~ /\d/
     if position != nil
       get_post_number(path,response,position)
-      get_post_content_editable(response,@post_number.to_i,path)
+      get_post_content_editable(response,@post_number.to_i)
     end
   end
   
-  def get_post_content_editable(response,post_number,path)
+  def get_post_content_editable(response,post_number)
     content = Filehandler.new()
     post = []
     post = content.edit_post(post_number)
-    delete_post(path,response)
+    content.delete_post(post_number)
     return response.body =<<-_end_of_html_
     <html>
     <body style= "background-color:#D1E0E0;">
@@ -142,6 +142,21 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     do_GET(req, res)
     escribir = Filehandler.new()
     escribir.save_post(@title,@comment)
+    res.body =<<-_end_of_html_
+    <html>
+    <body style= "background-image:url('http://learn-rails.com/images/ruby.png');background-color:#D1E0E0;background-repeat:no-repeat;background-position:450px 100px;background-size:100px 100px; ">
+         <h1 align = "center " style="color:#007A7A;">Blog in plain ruby using webrick</h1>
+	       <br><br>
+         <div>
+         <h2 style="color:#009999;">Menu</h2>
+         </div>
+         <form method="POST" enctype="multipart/form-data">
+         <a href = "newpost" name = "writepost" style="color:#E89C0C;">Write a new post</a><br>
+	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a>
+         </form>
+    </body>
+    </html>
+    _end_of_html_
   end
 
   def return_body_principal(res)
