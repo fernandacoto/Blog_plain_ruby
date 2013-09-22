@@ -1,9 +1,4 @@
 Inicio de Post
-Title:Fall out boy
-1111111111111111111111
-2013-09-18 11:16:53 -0600
-Fin de Post
-Inicio de Post
 Title:Green Day
 About green day
 2013-09-18 11:49:55 -0600
@@ -12,4 +7,9 @@ Inicio de Post
 Title:Simple Plan edited
 Simple plan
 2013-09-18 12:22:26 -0600
+Fin de Post
+Inicio de Post
+Title:Fall out boy Edited
+:P
+2013-09-18 12:23:43 -0600
 Fin de Post
