@@ -1,15 +1,10 @@
 Inicio de Post
-Title:Green Day
-About green day
-2013-09-18 11:49:55 -0600
+Title:Edited New test post
+Testing functionality write post
+2013-09-23 10:16:53 -0600
 Fin de Post
 Inicio de Post
-Title:Simple Plan edited
-Simple plan
-2013-09-18 12:22:26 -0600
-Fin de Post
-Inicio de Post
-Title:Fall out boy Edited
-:P
-2013-09-18 12:23:43 -0600
+Title:ETIDATO NUEVAMENTEPost de prueba editado
+Comentario de prueba
+2013-09-23 10:26:54 -0600
 Fin de Post

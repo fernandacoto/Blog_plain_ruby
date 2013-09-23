@@ -1,6 +1,7 @@
 module Blog
 require "webrick"
 require './Filehandler.rb'
+require './htmls.rb'
 
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
@@ -28,8 +29,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_show_post?(path)
-    clave ="Ver"
-    if path.include? clave
+    if path.include? "Ver"
       return true
     end
   end
@@ -43,8 +43,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_edit_post(path)
-    clave ="editar"
-    if path.include? clave
+    if path.include? "editar"
       return true
     end
   end
@@ -59,25 +58,14 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
   def get_post_content_editable(response,post_number)
     content = Filehandler.new()
+    html = Htmls.new()
     post = []
     post = content.edit_post(post_number)
     return response.body =<<-_end_of_html_
-    <html>
-    <body style= "background-color:#D1E0E0;">
-         <h1 align = "center ">Edit post</h1>
-	       <br><br>
-	       <form method="POST" enctype="multipart/form-data">
-                Title:    <input type="text" name="title" value ="#{post[0]}"><br>
-                Comment:  <textarea type= "text" name ="comment">#{post[1]}</textarea><br>
-               <input type="submit" /></form>
-	       </form>
-         <form method="POST" enctype="multipart/form-data">
-	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a><br>
-         <a href="newpost" name="writepost" style="color:#E89C0C;">Write a new post</a><br>
-         <a href="/" name="mainpage" style="color:#E89C0C;">Go to main page</a>
-         </form>
-    </body>
-    </html>
+          #{html.edit_one}
+          Title:    <input type="text" name="title" value ="#{post[0]}"><br>
+          Comment:  <textarea type= "text" name ="comment">#{post[1]}</textarea><br>
+          #{html.edit_two}
       _end_of_html_
   end
 
@@ -100,30 +88,18 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
 
   def get_post_content(response,post_number)
     content = Filehandler.new()
+    html = Htmls.new()
     post = []
     post = content.return_post(post_number)
     return response.body =<<-_end_of_html_
-      <html>
-      <body style= "background-color:#D1E0E0;">
-      <h1>Showing post number #{post_number}</h1>
-      <h2> #{post[0]}</h2>
-      <p>Comment: #{post[1] + "\n"}</p>
-      <p>Date/time: #{post[2]}</p>
-      <br>
-      <br>
-      <form method="POST" enctype="multipart/form-data">
-	      <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a><br>
-        <a href="newpost" name= "writepost" style="color:#E89C0C;">Write a new post</a><br>
-        <a href="/" name= "mainpage" style="color:#E89C0C;">Go to main page</a>
-      </form>
-      </body>
-      </html>
+      <html><body style= "background-color:#D1E0E0;"><h1>Showing post number #{post_number}</h1>
+      <h2> #{post[0]}</h2><p>Comment: #{post[1] + "\n"}</p><p>Date/time: #{post[2]}</p><br><br>
+      #{html.menu}
       _end_of_html_
   end
 
   def is_delete_post?(path)
-    clave ="eliminar"
-    if path.include? clave
+    if path.include? "eliminar"
       return true
     end
   end
@@ -141,58 +117,28 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     do_GET(req, res)
     escribir = Filehandler.new()
     escribir.save_post(@title,@comment)
-    res.body =<<-_end_of_html_
-    <html>
-    <body style= "background-image:url('http://learn-rails.com/images/ruby.png');background-color:#D1E0E0;background-repeat:no-repeat;background-position:450px 100px;background-size:100px 100px; ">
-         <h1 align = "center " style="color:#007A7A;">Blog in plain ruby using webrick</h1>
-	       <br><br>
-         <div>
-         <h2 style="color:#009999;">Menu</h2>
-         </div>
-         <form method="POST" enctype="multipart/form-data">
-         <a href = "newpost" name = "writepost" style="color:#E89C0C;">Write a new post</a><br>
-	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a>
-         </form>
-    </body>
-    </html>
-    _end_of_html_
+    html = Htmls.new()
+    res.body = html.main_page
+    really_needs_detele?(res,req)
+  end
+
+  def really_needs_detele?(res,req)
     if (req.path_info).include? "editar"
        delete_post(req.path_info,res)
     end
   end
 
   def return_body_principal(res)
-    return res.body =<<-_end_of_html_
-    <html>
-    <body style= "background-color:#D1E0E0;">
-         <h1 align = "center ">Blog in plain ruby using webrick</h1>
-	       <br><br>
-	       <form method="POST" enctype="multipart/form-data">
-                Title:    <input type="text" name="title"><br>
-                Comment:  <textarea type= "text" name ="comment"></textarea><br>
-               <input type="submit" /></form>
-	       </form>
-         <form method="POST" enctype="multipart/form-data">
-	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a><br>
-         <a href = "/" name = "main_page" style="color:#E89C0C;">Go to Main Page</a>
-         </form>
-    </body>
-    </html>
-    _end_of_html_
+    html = Htmls.new()
+    return res.body = html.write_post
   end 
 
   def return_titles(res)
+    html = Htmls.new()
     titles = Filehandler.new()
     return res.body =<<-_end_of_html_
-    <html>
-    <body style= "background-color:#D1E0E0;">
-    <h1>List of Post's</h1>
-    #{make_links(titles.get_posts_title)}
-    <a href="newpost" name="writepost" style="color:#E89C0C;">Write a new post</a><br>
-    <a href="/" name="mainpage" style="color:#E89C0C;">Go to main page</a>
-    </body>
-    </html>
-    _end_of_html_
+      #{html.index_of_post_one}#{make_links(titles.get_posts_title)}#{html.index_of_post_two} 
+                        _end_of_html_
   end
 
   def make_links(titles)
@@ -202,7 +148,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       |element|
       post = ""
       post<<index.to_s
-      list<<"<li><a href=#{"Ver" + post} style=color:#E89C0C; name=#{element}>#{element}</a><ul><li><a href=#{"eliminar"+ post} style=color:#440CE8;>Eliminar</a></li><li><a href=#{"editar"+ post} style=color:#440CE8;>Editar</a></li></ul></li>"
+      list<<"<li><a href=#{"Ver" + post} style=color:#E89C0C;>#{element}</a><ul><li><a href=#{"eliminar"+ post} style=color:#440CE8;>Eliminar</a></li><li><a href=#{"editar"+ post} style=color:#440CE8;>Editar</a></li></ul></li>"
       index +=1
     end
     list<<"</ul>"
@@ -210,21 +156,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
  def return_main_page(res)
-    return res.body =<<-_end_of_html_
-    <html>
-    <body style= "background-image:url('http://learn-rails.com/images/ruby.png');background-color:#D1E0E0;background-repeat:no-repeat;background-position:450px 100px;background-size:100px 100px; ">
-         <h1 align = "center " style="color:#007A7A;">Blog in plain ruby using webrick</h1>
-	       <br><br>
-         <div>
-         <h2 style="color:#009999;">Menu</h2>
-         </div>
-         <form method="POST" enctype="multipart/form-data">
-         <a href = "newpost" name = "writepost" style="color:#E89C0C;">Write a new post</a><br>
-	       <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a>
-         </form>
-    </body>
-    </html>
-    _end_of_html_
+    html = Htmls.new()
+    return res.body =html.main_page
  end
 
 end
