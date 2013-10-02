@@ -1,14 +1,15 @@
 module Blog
 require "webrick"
-require './Filehandler.rb'
-require './htmls.rb'
-
+#require './htmls.rb'
+#require './Filehandler.rb'
+require Dir.pwd+'/lib/blog/htmls.rb'
+require Dir.pwd+'/lib/blog/Filehandler.rb'
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
-  def initialize(server, limit)
-    @max_content_length = limit
-    super
-  end
+  #def initialize(server, limit)
+  #  @max_content_length = limit
+  #  super
+  #end
 
   def do_GET(req, res)
     @title = req.query["title"]
@@ -162,8 +163,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
 
 end
 
-svr = WEBrick::HTTPServer.new(:Port=>10080)
-svr.mount("/", PostSampleServlet, 100000)
-  trap(:INT){ svr.shutdown }
-  svr.start
+#svr = WEBrick::HTTPServer.new(:Port=>10080)
+#svr.mount("/", PostSampleServlet, 100000)
+#  trap(:INT){ svr.shutdown }
+#  svr.start
 end

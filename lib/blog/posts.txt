@@ -4,7 +4,12 @@ Testing functionality write post
 2013-09-23 10:16:53 -0600
 Fin de Post
 Inicio de Post
-Title:ETIDATO NUEVAMENTEPost de prueba editado
+Title:Editado NUEVAMENTEPost de prueba editado
 Comentario de prueba
-2013-09-23 10:26:54 -0600
+2013-10-02 10:22:49 -0600
+Fin de Post
+Inicio de Post
+Title:Testing
+Testing
+2013-10-02 10:23:07 -0600
 Fin de Post

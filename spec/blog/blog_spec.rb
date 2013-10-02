@@ -1,29 +1,15 @@
-require 'spec_helper'
+module Blog
+require Dir.pwd+'/spec/spec_helper'
 require 'webrick'
-require Blog
-  describe Blog::PostSampleServlet do
-    before(:each) do
-     @server=Thread.new do
-        svr = WEBrick::HTTPServer.new(:Port=>10080)
-        svr.mount("/",PostSampleServlet,100000)
-        svr.start
-     end
-    end
-    after(:each) do
-      @server.shutdown
-    end
+describe PostSampleServlet do
     describe "#post" do
       it "waits for title and a comment" do
-        #svr = WEBrick::HTTPServer.new(:Port=>10080)
-        #svr.mount("/",PostSampleServlet, 100000)
-        #trap(:INT){ svr.shutdown }
-        #svr.start
-        @server.join
-        post "http://localhost:10080/"
-        status.should.equal 200
-        #res.code.should == 200
-        svr.shutdown
-        # save_post
+        query = {title: "Test title",commment: "Testing comment"}
+        res = {}
+        initialize_test_server(1)
+        blog = PostSampleServlet.new(initialize_test_server(1))
+        blog.do_POST(query, res)
+        initialize_test_server(2)
       end
     end
     describe "#see#" do
@@ -35,6 +21,21 @@ require Blog
     describe "#delete#" do
       it "should delete a post"
     end
-  end
-
-
+def initialize_test_server(number)
+  start = 1
+  @test_thread_server = Thread.new{
+    if start == number
+      @svr = WEBrick::HTTPServer.new(:Port=>10080)
+      @svr.mount("/",PostSampleServlet,100000)
+      @svr.start 
+    else
+      @svr.shutdown
+      stop_test_server
+    end
+  }
+end
+def stop_test_server
+    Thread.kill(@test_thread_server)
+end
+end
+end

@@ -1,8 +1,8 @@
 module Blog
 require "webrick"
-require './Filehandler.rb'
+#require './Filehandler.rb'
 require './htmls.rb'
-
+require Dir.pwd+'/lib/blog/Filehandler.rb'
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
   def initialize(server, limit)
@@ -29,8 +29,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_show_post?(path)
-    clave ="Ver"
-    if path.include? clave
+    if path.include? "Ver"
       return true
     end
   end
@@ -44,8 +43,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_edit_post(path)
-    clave ="editar"
-    if path.include? clave
+    if path.include? "editar"
       return true
     end
   end
@@ -64,20 +62,10 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     post = []
     post = content.edit_post(post_number)
     return response.body =<<-_end_of_html_
-       <html>
-   	 <body style= "background-color:#D1E0E0;">
-         <h1 align = "center ">Edit post</h1><br><br>
-         <form method="POST" enctype="multipart/form-data">
+          #{html.edit_one}
           Title:    <input type="text" name="title" value ="#{post[0]}"><br>
           Comment:  <textarea type= "text" name ="comment">#{post[1]}</textarea><br>
-          <input type="submit" /></form>
-         <form method="POST" enctype="multipart/form-data">
-	 <a href="url" name= "index" style="color:#E89C0C;">Index of posts</a><br>
-         <a href="newpost" name="writepost" style="color:#E89C0C;">Write a new post</a><br>
-         <a href="/" name="mainpage" style="color:#E89C0C;">Go to main page</a>
-         </form>
-      </body>
-      </html> 
+          #{html.edit_two}
       _end_of_html_
   end
 
@@ -111,8 +99,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_delete_post?(path)
-    clave ="eliminar"
-    if path.include? clave
+    if path.include? "eliminar"
       return true
     end
   end
@@ -161,7 +148,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       |element|
       post = ""
       post<<index.to_s
-      list<<"<li><a href=#{"Ver" + post} style=color:#E89C0C; name=#{element}>#{element}</a><ul><li><a href=#{"eliminar"+ post} style=color:#440CE8;>Eliminar</a></li><li><a href=#{"editar"+ post} style=color:#440CE8;>Editar</a></li></ul></li>"
+      list<<"<li><a href=#{"Ver" + post} style=color:#E89C0C;>#{element}</a><ul><li><a href=#{"eliminar"+ post} style=color:#440CE8;>Eliminar</a></li><li><a href=#{"editar"+ post} style=color:#440CE8;>Editar</a></li></ul></li>"
       index +=1
     end
     list<<"</ul>"

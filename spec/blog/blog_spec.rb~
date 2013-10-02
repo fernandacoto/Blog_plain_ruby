@@ -1,19 +1,17 @@
-require 'spec_helper'
 module Blog
-  describe Blog do
+require Dir.pwd+'/spec/spec_helper'
+require 'webrick'
+describe PostSampleServlet do
+  #let(:blog) {PostSampleServlet.new}
     describe "#post" do
       it "waits for title and a comment" do
-        @tilte = "testing"
-        @comment = "testing"
-        svr = WEBrick::HTTPServer.new(:Port=>10080)
-        svr.mount("/", PostSampleServlet, 100000)
-        #trap(:INT){ svr.shutdown }
-        svr.start
-        get :get_event, {:title => "TITULO 1", :comment => "Comment" }
-        response.code.should == "204"
-        svr.shutdown
-        #srv.shoutdown
-        # save_post
+        params = {}
+        params["title"] = "Test title"
+        params["commment"]= "Testing comment"
+        initialize_test_server(1)
+        blog = PostSampleServlet.new(initialize_test_server(1))
+        blog.do_POST(params, res.as_null_object)
+        initialize_test_server(2)
       end
     end
     describe "#see#" do
@@ -25,6 +23,21 @@ module Blog
     describe "#delete#" do
       it "should delete a post"
     end
-  end
+def initialize_test_server(number)
+  start = 1
+  @test_thread_server = Thread.new{
+    if start == number
+      @svr = WEBrick::HTTPServer.new(:Port=>10080)
+      @svr.mount("/",PostSampleServlet,100000)
+      @svr.start 
+    else
+      @svr.shutdown
+      stop_test_server
+    end
+  }
 end
-
+def stop_test_server
+    Thread.kill(@test_thread_server)
+end
+end
+end

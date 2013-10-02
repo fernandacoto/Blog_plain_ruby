@@ -1,2 +1,15 @@
-require '/lib/blog.rb'
+require Dir.pwd+'/lib/blog/newblog.rb'
+require Dir.pwd+'/lib/blog/Filehandler.rb'
+require 'webrick'
 
+def initialize_test_sever
+  @test_thread_server = Thread.new{
+    @svr = WEBrick::HTTPServer.new(:Port=>10080)
+    @svr.mount("/",PostSampleServlet,100000)
+    @svr.start 
+  }
+end
+def stop_test_sever
+    @svr.stop
+    Thread.kill(@test_thread_server)
+end
