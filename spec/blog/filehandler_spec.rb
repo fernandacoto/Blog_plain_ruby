@@ -14,21 +14,16 @@ module Blog
       end
     end
     describe "#returns a specified post number" do
-      it "should show all the details about the post" do
-	      #result = post.return_post(1)
-        #result[0].should == "Title:titulo\n"
+      it "asking for the first post it has to return the title of that post number" do
+        post_content = $new_post_test.return_post(1)
+        expect(post_content[0].chomp).to eq("Title:" + TITLE_TEST)
       end
     end
-    describe "#edit#" do
-      it "should update a post"
-    end
-    describe "#delete#" do
-      it "should delete a post" do
-      #d = Filehandler.new()
-      #d.delete_post(2)
-      #line_counter2= IO.readlines('./posts.txt').count
-      #line_counter2.should == 5
-    end
+    describe "#delete" do
+      it "deletes the first post number, the file after that has 0 lines of text" do
+        $new_post_test.delete_post(1)
+        expect(IO.readlines(FILE_ROUTE).count).to eq(0)
+      end
     end
   end
 end
