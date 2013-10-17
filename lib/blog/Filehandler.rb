@@ -1,9 +1,8 @@
 require 'fileutils'
-module Blog
 class Filehandler
-
+  FILE_ROUTE = Dir.pwd+'/posts.txt'
   def save_post(title,comment)
-    File.open("posts.txt", 'a+') do
+    File.open(FILE_ROUTE, 'a+') do
     |f| f.write("Inicio de Post")
       	f.write("\n"+"Title:" + title + "\n" )
       	f.write( comment + "\n")
@@ -11,10 +10,10 @@ class Filehandler
       	f.write("Fin de Post" + "\n")
     end 
   end
-
+ 
   def get_posts_title
     titles=[]
-    File.open("posts.txt",'r').each_line do |line|
+    File.open(FILE_ROUTE,'r').each_line do |line|
       compare_line(line,titles)
     end
     return titles
@@ -27,38 +26,60 @@ class Filehandler
   end
 
   def return_post(index)
-    line= (index - 1)*5
+    line = get_line_number_start_post(index)
     post = []
-    post[0] = IO.readlines("posts.txt")[line + 1].to_s
-    post[1] = IO.readlines("posts.txt")[line + 2].to_s
-    post[2] = IO.readlines("posts.txt")[line + 3].to_s
+    post[0] = IO.readlines(FILE_ROUTE)[line].to_s
+    more_than_a_line_comment(line,post)
+  end
+
+  def find_line(title)
+    File.open(FILE_ROUTE,'r') do |file|
+      file.readlines.each_with_index do |line,index|
+        return index if line.include? title
+      end 
+    end
+  end
+
+  def more_than_a_line_comment(line,post)
+   counter = 0
+    while (!(IO.readlines(FILE_ROUTE)[line + counter].to_s).include? "Fin de Post")
+      post[counter] = IO.readlines(FILE_ROUTE)[line + counter].to_s
+      counter += 1
+    end
     return post
   end
 
-  def edit_post(index)
-    final_post=[]
-    post=return_post(index)
-    final_post[0] = post[0].chomp
-    final_post[1] = post[1].chomp
-    final_post[2] = post[2].chomp
-    return final_post
-  end
-
   def delete_post(post_number)
-    line_in_file = (post_number - 1) * 5
+    line_in_file = get_line_number_start_post(post_number) - 1
+    end_line = get_end_of_post(line_in_file)
     in_line = 0
-    line_counter= IO.readlines("posts.txt").count
-    File.open('posts.txt.tmp','w') do |file2|
+    line_counter= IO.readlines(FILE_ROUTE).count
+    File.open(Dir.pwd+'/posts.txt.tmp','w') do |file2|
       while(line_counter >= in_line)
-       if((in_line == line_in_file)||(in_line == (line_in_file + 1)) || (in_line == (line_in_file + 2)) || (in_line == (line_in_file + 3))|| (in_line == (line_in_file + 4)))
+       if((in_line >= line_in_file)&&(in_line <= end_line))
        else 
-          file2.write(IO.readlines('posts.txt')[in_line].to_s)
+          file2.write(IO.readlines(FILE_ROUTE)[in_line].to_s)
        end
         in_line += 1
       end
     end
-    FileUtils.mv 'posts.txt.tmp','posts.txt'
+    FileUtils.mv Dir.pwd+'/posts.txt.tmp',FILE_ROUTE
+  end
+  
+  def get_line_number_start_post(post_number)
+    titles = []
+    titles = get_posts_title
+    line = find_line(titles[post_number - 1])
+    return line
   end
 
-end
+  def get_end_of_post(start_line)
+    while(start_line <= IO.readlines(FILE_ROUTE).count)
+       if ((IO.readlines(FILE_ROUTE)[start_line].to_s).include? "Fin de Post")
+         return start_line
+       end
+       start_line +=1
+    end
+    return start_line
+  end
 end

@@ -1,15 +1,15 @@
 module Blog
 require "webrick"
-#require './htmls.rb'
-#require './Filehandler.rb'
-require Dir.pwd+'/lib/blog/htmls.rb'
-require Dir.pwd+'/lib/blog/Filehandler.rb'
+require './htmls.rb'
+require './Filehandler.rb'
+#require Dir.pwd+'/lib/blog/htmls.rb'
+#require Dir.pwd+'/lib/blog/Filehandler.rb'
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
-  #def initialize(server, limit)
-  #  @max_content_length = limit
-  #  super
-  #end
+  def initialize(server, limit)
+    @max_content_length = limit
+    super
+  end
 
   def do_GET(req, res)
     @title = req.query["title"]
@@ -30,7 +30,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_show_post?(path)
-    if path.include? "Ver"
+    if path.include? "show"
       return true
     end
   end
@@ -44,7 +44,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def is_edit_post(path)
-    if path.include? "editar"
+    if path.include? "edit"
       return true
     end
   end
@@ -61,13 +61,24 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     content = Filehandler.new()
     html = Htmls.new()
     post = []
-    post = content.edit_post(post_number)
+    post = content.return_post(post_number)
+    comment = obtain_comment(post)
     return response.body =<<-_end_of_html_
           #{html.edit_one}
           Title:    <input type="text" name="title" value ="#{post[0]}"><br>
-          Comment:  <textarea type= "text" name ="comment">#{post[1]}</textarea><br>
+          Comment:  <textarea type= "text" name ="comment">#{comment}</textarea><br>
           #{html.edit_two}
       _end_of_html_
+  end
+
+  def obtain_comment(comment_in_array)
+    comment = ""
+    counter = 1
+    while counter < (comment_in_array.length - 1)
+      comment << comment_in_array[counter]
+      counter += 1
+    end
+    return comment
   end
 
   def get_post_number(path,response,position)
@@ -92,15 +103,27 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     html = Htmls.new()
     post = []
     post = content.return_post(post_number)
+    comment = make_comment(post)
     return response.body =<<-_end_of_html_
-      <html><body style= "background-color:#D1E0E0;"><h1>Showing post number #{post_number}</h1>
-      <h2> #{post[0]}</h2><p>Comment: #{post[1] + "\n"}</p><p>Date/time: #{post[2]}</p><br><br>
+      <html><body style= "background-color:#D1E0E0;"><h1 align = "center">Showing post number #{post_number}</h1>
+      <h2> #{post[0]}</h2>#{comment}
       #{html.menu}
       _end_of_html_
   end
 
+  def make_comment(comment_in_array)
+    comment = "<h2>Comment:</h2><p style = padding-left:70px >"
+    counter = 1
+    while counter < (comment_in_array.length - 1)
+      comment << comment_in_array[counter]
+      counter += 1
+    end
+    comment << "</p>" + "<p>Date/time " + comment_in_array[counter] + "</p>"
+    return comment
+  end
+
   def is_delete_post?(path)
-    if path.include? "eliminar"
+    if path.include? "delete"
       return true
     end
   end
@@ -120,11 +143,11 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
     escribir.save_post(@title,@comment)
     html = Htmls.new()
     res.body = html.main_page
-    really_needs_detele?(res,req)
+    really_needs_delete?(res,req)
   end
 
-  def really_needs_detele?(res,req)
-    if (req.path_info).include? "editar"
+  def really_needs_delete?(res,req)
+    if (req.path_info).include? "edit"
        delete_post(req.path_info,res)
     end
   end
@@ -149,7 +172,7 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
       |element|
       post = ""
       post<<index.to_s
-      list<<"<li><a href=#{"Ver" + post} style=color:#E89C0C;>#{element}</a><ul><li><a href=#{"eliminar"+ post} style=color:#440CE8;>Eliminar</a></li><li><a href=#{"editar"+ post} style=color:#440CE8;>Editar</a></li></ul></li>"
+      list<<"<li><a href=#{"show" + post} style=color:#E89C0C;>#{element}</a><ul><li><a href=#{"delete"+ post} style=color:#440CE8;>Delete</a></li><li><a href=#{"edit"+ post} style=color:#440CE8;>Edit</a></li></ul></li>"
       index +=1
     end
     list<<"</ul>"
@@ -162,9 +185,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
  end
 
 end
-
-#svr = WEBrick::HTTPServer.new(:Port=>10080)
-#svr.mount("/", PostSampleServlet, 100000)
-#  trap(:INT){ svr.shutdown }
-#  svr.start
+svr = WEBrick::HTTPServer.new(:Port=>10080)
+svr.mount("/", PostSampleServlet, 100000)
+  trap(:INT){ svr.shutdown }
+  svr.start
 end

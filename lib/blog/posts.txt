@@ -1,15 +1,15 @@
 Inicio de Post
-Title:Edited New test post
-Testing functionality write post
-2013-09-23 10:16:53 -0600
+Title:Please review this tip:
+This tip was imported from vim.org and needs general review.
+You might clean up comments or merge similar tips.
+Add suitable categories so people can find the tip.
+Please avoid the discussion page (use the Comments section below for notes).
+If the tip contains good advice for current Vim, remove the {{review}} line.
+2013-10-17 08:17:49 -0600
 Fin de Post
 Inicio de Post
-Title:Editado NUEVAMENTEPost de prueba editado
-Comentario de prueba
-2013-10-02 10:22:49 -0600
-Fin de Post
-Inicio de Post
-Title:Testing
-Testing
-2013-10-02 10:23:07 -0600
+Title:2 Edited Fall out boy
+Changin this to verify that edit works
+:p  IT WORKS
+2013-10-17 08:23:44 -0600
 Fin de Post
