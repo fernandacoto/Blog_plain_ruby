@@ -56,8 +56,7 @@ class Filehandler
     line_counter= IO.readlines(FILE_ROUTE).count
     File.open(Dir.pwd+'/posts.txt.tmp','w') do |file2|
       while(line_counter >= in_line)
-       if((in_line >= line_in_file)&&(in_line <= end_line))
-       else 
+       unless((in_line >= line_in_file) && (in_line <= end_line))
           file2.write(IO.readlines(FILE_ROUTE)[in_line].to_s)
        end
         in_line += 1
