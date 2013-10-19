@@ -1,9 +1,9 @@
 module Blog
 require "webrick"
-require './htmls.rb'
-require './Filehandler.rb'
-#require Dir.pwd+'/lib/blog/htmls.rb'
-#require Dir.pwd+'/lib/blog/Filehandler.rb'
+#require './htmls.rb'
+#require './Filehandler.rb'
+require Dir.pwd+'/lib/blog/htmls.rb'
+require Dir.pwd+'/lib/blog/Filehandler.rb'
 class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
   
   def initialize(server, limit)
@@ -185,8 +185,8 @@ class PostSampleServlet < WEBrick::HTTPServlet::AbstractServlet
  end
 
 end
-svr = WEBrick::HTTPServer.new(:Port=>10080)
-svr.mount("/", PostSampleServlet, 100000)
-  trap(:INT){ svr.shutdown }
-  svr.start
+#svr = WEBrick::HTTPServer.new(:Port=>10080)
+#svr.mount("/", PostSampleServlet, 100000)
+#  trap(:INT){ svr.shutdown }
+#  svr.start
 end

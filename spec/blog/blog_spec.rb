@@ -7,16 +7,15 @@ module Blog
 describe PostSampleServlet do
   before(:all) do
     @server = Server.instance
-    Thread.new do
-      @server.initialize_test_server
-    end
+    Thread.new {
+      @server.initialize_test_server }
   end
   after(:all) do
     @server.stop_test_server
   end
   describe "#post" do
       it "waits for title and a comment" do
-        print Net::HTTP.get_response('localhost',"/",3001)
+        print Net::HTTP.get_response('localhost',"/",10080)
         #Net::HTTP.start('http://localhost:10080') { |http| print http.get('/') }
         #Net::HTTP.get('127.0.0.1',"/index",10080)
         #res = Net::HTTP.get_response('http://localhost:10080/index')

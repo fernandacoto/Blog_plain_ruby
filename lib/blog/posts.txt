@@ -7,9 +7,3 @@ Please avoid the discussion page (use the Comments section below for notes).
 If the tip contains good advice for current Vim, remove the {{review}} line.
 2013-10-17 08:17:49 -0600
 Fin de Post
-Inicio de Post
-Title:2 Edited Fall out boy
-Changin this to verify that edit works
-:p  IT WORKS
-2013-10-17 08:23:44 -0600
-Fin de Post
